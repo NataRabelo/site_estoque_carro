@@ -19,17 +19,29 @@ def dashboard():
     cars = Car.query.all()
     return render_template('dashboard.html', cars=cars)
 
+@car_bp.route('/estoque')
+def estoque():
+    cars = Car.query.all()
+    return render_template('estoque.html', cars=cars)
+
 
 @car_bp.route('/add_car', methods=['GET', 'POST'])
 def add_car():
     if request.method == 'POST':
         # Obter os campos do formulário
-        marca = request.form.get('marca')
         modelo = request.form.get('modelo')
+        marca = request.form.get('marca')
+        ano = request.form.get('ano')
+        km = request.form.get('km')
+        cambio = request.form.get('cambio')
+        combustivel = request.form.get('combustivel')
+        final_placa = request.form.get('final_placa')
+        cor = request.form.get('cor')
         preco = request.form.get('preco')
 
+
         # Verificar se os campos obrigatórios foram preenchidos
-        if not marca or not modelo or not preco:
+        if not marca or not modelo or not preco or not ano or not km or not cambio or not combustivel or not final_placa or not cor:
             flash('Todos os campos são obrigatórios!')
             return redirect(request.url)
 
@@ -55,7 +67,7 @@ def add_car():
         image.save(image_path)
 
         # Criar o novo carro e salvar no banco de dados
-        new_car = Car(marca=marca, modelo=modelo, preco=preco, image_url=filename)
+        new_car = Car(marca=marca, modelo=modelo, ano=ano, km=km, cambio=cambio, combustivel=combustivel, final_da_placa=final_placa, cor=cor, preco=preco, image_url=filename)
         db.session.add(new_car)
         db.session.commit()
 
@@ -71,9 +83,15 @@ def edit_car(id):
 
     if request.method == 'POST':
         # Obter os dados do formulário
-        car.marca = request.form['marca']
-        car.modelo = request.form['modelo']
-        car.preco = request.form['preco']
+        modelo = request.form.get('modelo')
+        marca = request.form.get('marca')
+        ano = request.form.get('ano')
+        km = request.form.get('km')
+        cambio = request.form.get('cambio')
+        combustivel = request.form.get('combustivel')
+        final_placa = request.form.get('final_placa')
+        cor = request.form.get('cor')
+        preco = request.form.get('preco')
 
         # Verificar se uma nova imagem foi enviada
         if 'image' in request.files:
