@@ -5,7 +5,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv('SECRET_KEY', 'secret')
 
-    UPLOAD_FOLDER = os.path.join(os.getcwd(), 'images')
+    UPLOAD_FOLDER = os.path.join(os.getcwd(), 'app', 'static', 'images')
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
