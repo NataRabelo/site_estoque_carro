@@ -41,3 +41,10 @@ footer {
     object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
     overflow: hidden;
 }
+
+.responsive-img-contat {
+    width: 400px;
+    height: 400px; /* Altura fixa */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+    overflow: hidden;
+}
